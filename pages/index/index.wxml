@@ -1,13 +1,71 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
-</view>
+<view class="Box">
+    <view class="swiper">
+    
+    <swiper indicator-active-color="#fff" indicator-dots="true" autoplay="true">
+          <swiper-item wx:for="{{banner}}" wx:key="index" >
+              <image src="{{item.picUrl}}"></image>
+          </swiper-item>
+    </swiper>
+       <input class="inp" bindtap="goss" placeholder="输入搜索关键词"></input>
+    </view>
+    
+
+    <view class="gonggao">
+      <image src="/image/gg.png"></image>
+      <text class="txt">商城新开张，优惠多多，戳 戳 戳 我看详情。</text>
+      <text>更多 ></text>
+    </view>
+
+    <view class="list" >
+        <view wx:for="{{list}}" bindtap="golist" data-item="{{item.id}}" data-index="{{index}}" wx:key="index">
+          <image src="{{item.icon}}"></image>
+          <view>{{item.name}}</view>
+        </view>
+    
+    </view>
+<view class="tt">———— 爆品推荐 ————</view>
+    <view class="tuijian">
+        <view class="box" wx:for="{{tuijian}}" wx:key="index" data-item="{{item.id}}" bindtap="goxq">
+            <image src="{{item.pic}}"></image>
+            <view class="uu">{{item.name}}</view>
+            <view class="wen">
+                <text class="txt">￥{{item.minPrice}}</text>
+
+                <text class="cc">￥{{item.originalPrice}}</text>
+            </view>
+        </view>
+    </view>
+
+
+    <view class="pintuan">
+      <view class="tt">———— 全民拼团 ————</view>
+      <view class="" wx:for="{{pintuan}}" wx:key="index" data-item="{{item.id}}" bindtap="goxq">
+       <view class="imger">
+          <image src="{{item.pic}}"></image>
+       </view> 
+        <text>{{item.name}}</text>
+        <view class="name">{{item.characteristic}}</view>
+        <view class="tui">
+                <text class="txt">￥  {{item.minPrice}}  </text>
+
+                <text class="cc">￥  {{item.originalPrice}}  </text>
+                <button class="btn"> 拼团</button>
+            </view>
+      </view>
+    </view>
+
+    <view class="tt1">———— 商品列表 ————</view>
+
+    <view class="fy-vv">
+          <view class="box" wx:for="{{msg}}" wx:key="idnex" data-item="{{item.id}}" bindtap="goxq">
+                <image src="{{item.pic}}"></image>
+                <view class="uu">{{item.name}}</view>
+                <view class="wen">
+                    <text class="txt">￥{{item.minPrice}}</text>
+
+                    <text class="cc">￥{{item.originalPrice}}</text>
+                </view>
+            </view>
+    </view>
+    
+</view> 

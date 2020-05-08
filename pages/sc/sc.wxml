@@ -1,0 +1,20 @@
+<!--pages/sc/sc.wxml-->
+<page>
+<view class="box" wx:if="{{show}}">
+  <view class="weui-loadmore weui-loadmore_line" style="margin-top:110px;">
+  <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无收藏</view>
+</view>
+</view>
+<!--  -->
+<view class="ul">
+  <view class="li" wx:for="{{list}}" wx:key="index">
+    <view class="t1" data-id="{{item.goodsId}}" catchtap="add">
+      <image src="{{item.pic}}"></image>
+    </view>
+    <view class="t2" data-id="{{item.goodsId}}" catchtap="add">{{item.goodsName}}</view>
+    <view class="t3">
+      <image src="/public/images/del.png" catchtap="del" data-gd="{{item.goodsId}}" data-id="{{item.id}}"></image>
+    </view>
+  </view>
+</view>
+</page>

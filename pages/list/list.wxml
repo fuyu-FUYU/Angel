@@ -1,0 +1,36 @@
+
+<input class="inp" bindtap="goss" placeholder="输入搜索关键词"></input>
+<view class="page">
+  <view class="flex_row">
+    <view class="nav_left" >
+      <view style="height:1180rpx;">
+      
+        <view class='left {{indexs ===index ? "active":""}}'  wx:for="{{left}}" wx:key="idnex" data-id="{{item.id}}" data-index="{{index}}" bindtap="right" >{{item.name}}</view>
+      </view>
+
+    </view> 
+    <view class="nav_right">
+      <scroll-view class="nav_right_list" scroll-y="true">
+        <view style="height:1000rpx;">
+
+          <view class="right" bindtap="goxq" data-item="{{item.id}}" wx:for="{{list}}" wx:key="index">
+          <image src="{{item.pic}}"></image>
+          <view class="acc" style="margin:18rpx">
+               <view class="tt">{{item.name}}</view>
+               <view class="tt2">
+                    <view class="red">￥{{item.minPrice}}</view><image src="/image/cart(2).png"></image>
+               </view>
+               
+               <view class="tt2">
+                    <text class="tt1">已售 {{item.numberSells}}件</text>
+                    <text>评价 +0积分</text>
+               </view>
+               
+          </view>
+          </view>
+        
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

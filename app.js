@@ -1,33 +1,86 @@
 //app.js
 App({
   onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
-    // 登录
+    this.zc()
+  },
+  onShow() {
+    this.getD();
+  },
+  lg() {
     wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+      success(res) {
+        //console.log('wx.login:',res)
+        let { code } = res;
+        wx.request({
+          url: 'https://api.it120.cc/fyy/user/wxapp/login?code=' + code,
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          method: 'POST',
+          success(result) {
+            //console.log('登录返回',result)
+            wx.setStorageSync('token', result.data.data.token)
+          }
+        })
       }
     })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
+  },
+  //注册到后台
+  zc() {
+    var that = this;
+    wx.login({
+      success(res) {
+        //console.log('wx.login:',res)
+        let { code } = res;
+        wx.getUserInfo({
+          success: (result) => {
+            //console.log(res)
+            let { encryptedData, iv, userInfo } = result
+            wx.request({
+              method: 'POST',
+              header: {
+                'content-type': 'application/x-www-form-urlencoded'
+              },
+              url: `https://api.it120.cc/fyy/user/wxapp/register/complex`,
 
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
+              data: {
+                code, encryptedData, iv
+              },
+              success(resut) {
+                // console.log('登录返回',resut)
+                if (resut.code == 10000) {
+                  wx.showToast({
+                    title: '用户已注册',
+                  })
+                  that.getD();
+                }
+                else {
+                  that.lg();
+                  that.globalData.userInfo = userInfo
+                }
               }
-            }
+            })
+
+          }
+        })
+      }
+    })
+  },
+  getD() {
+    let token = wx.getStorageSync('token');
+    wx.request({
+      url: 'https://api.it120.cc/fyy/shopping-cart/info?token=' + token,
+      success: (res) => {
+        if (res.data.code === 700) {
+          wx.removeTabBarBadge({//移除tabbar右上角的文本
+            index: 2,	//tabbar下标
+          })
+        }
+        else {
+          let num = res.data.data.number
+          wx.setTabBarBadge({
+            index: 2,
+            text: JSON.stringify(num)
           })
         }
       }

@@ -1,0 +1,86 @@
+<view class="top">
+<image src="{{userInfo.avatarUrl}}" wx:if="{{flag}}"></image>
+<image src="/image/nologin.png" wx:if="{{!flag}}"></image>
+<view class="name" wx:if="{{!show}}">{{userInfo.nickName}}</view>
+<view class="btb" catchtap="lj" wx:if="{{!flag}}">立即登录</view>
+</view>
+<view class="top-content">
+<view> <view>0.00</view> <view>余额</view> </view>
+<view> <view>0.00</view> <view>冻结</view> </view>
+<view> <view>0</view> <view>积分</view> </view>
+<view> <view>0</view> <view>成长值</view> </view>
+</view>
+
+<view class="dingdan"> <text>我的订单</text> <image src="/image/dd.png" class="dd"></image> </view>
+<view class="list">
+<view>
+<image src="/image/1.png"></image>
+<view>待付款</view>
+</view>
+<view>
+<image src="/image/2.png"></image>
+<view>待发货</view>
+</view>
+<view>
+<image src="/image/3.png"></image>
+<view>待收货</view>
+</view>
+<view>
+<image src="/image/4.png"></image>
+<view>待评价</view>
+</view>
+<view>
+<image src="/image/5.png"></image>
+<view>售后</view>
+</view>
+
+</view>
+
+<view class="dingdan"> <text>优惠买单</text> <image src="/image/dd.png" class="dd"></image> </view>
+<view class="dingdan bd"> <text>资金明细</text> <image src="/image/dd.png" class="dd"></image> </view>
+
+<view class="dingdan bd"> <text>成为分销商</text> <image src="/image/dd.png" class="dd"></image> </view>
+
+<view class="dingdan"> <text>申请发票</text> <image src="/image/dd.png" class="dd"></image></view>
+<view class="dingdan bd"> <text>发票记录</text> <image src="/image/dd.png" class="dd"></image> </view>
+
+<view class="dingdan"> <text>收货地址</text> <image src="/image/dd.png" class="dd"></image></view>
+<view class="dingdan"> <text>领卷中心</text><image src="/image/dd.png" class="dd"></image></view>
+<view class="dingdan bd" catchtap="sc"> <text>我的收藏</text> <image src="/image/dd.png" class="dd"></image> </view>
+
+<view class="dingdan"> <text>每日签到</text> <image src="/image/dd.png" class="dd"></image> </view>
+<view class="dingdan"> <text>积分卷兑换积分</text> <image src="/image/dd.png" class="dd"></image> </view>
+<view class="dingdan bd"> <text>积分兑换成长值</text> <image src="/image/dd.png" class="dd"></image> </view>
+
+<view class="dingdan"> <text>关于我们</text> <image src="/image/dd.png" class="dd"></image> </view>
+<view class="dingdan"> <text>绑定手机</text> <image src="/image/dd.png" class="dd"></image> </view>
+<view class="dingdan"> <text>清除缓存</text> <image src="/image/dd.png" class="dd"></image> </view>
+<view class="dingdan bd" catchtap="tc"> <text>退出登录</text><image src="/image/dd.png" class="dd"></image> </view>
+
+<view class="dingdan center"> EastWorld v 8.3.1 </view>
+
+<!-- 弹框 -->
+<view>
+<van-dialog
+  use-slot
+  title=""
+  show="{{ show }}"
+  show-cancel-button
+  confirm-button-open-type="getUserInfo"
+  bind:close="onClose"
+  bind:getuserinfo="getUserInfo"
+  showConfirmButton="{{false}}"
+  showCancelButton="{{false}}"
+  customStyle="width:300px;height:330px;"
+>
+  <view class="bb">
+    <image src="/image/nologin.png" class="tt"/>
+    <view class="s">授权登录</view>
+    <view class="tt1">· 请授权小程序登录</view>
+    <view class="tt1">· 我们不会公布您的这些信息</view>
+    <view class="tt1">· 只是为了给您提供更好的服务</view>
+    <view class="yx" catchtap="yx">允许</view>
+    <view class="zb" catchtap="zb">暂不登录</view>
+  </view> 
+</van-dialog>
+</view>

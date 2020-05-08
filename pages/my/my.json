@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "van-dialog": "@vant/weapp/dialog"
+  },
+  "navigationBarTitleText": "会员中心"
+}

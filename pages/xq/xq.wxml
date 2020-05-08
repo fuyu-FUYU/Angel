@@ -1,0 +1,57 @@
+
+<view>
+    <image class="item" src="{{list.basicInfo.pic}}"></image>
+    <view class="box">
+      <view class="nn" style="margin:10rpx 0">{{list.basicInfo.name}} </view>
+      <view class="ff">
+      <view>
+        <text style="color:red;font-size:45rpx">￥{{list.basicInfo.minPrice}}</text>
+        <text class="cc">￥{{list.basicInfo.originalPrice}}</text>
+      </view>
+        <view class="ong">  
+           <image src="/image/fenxiang_1.png"></image> 
+           <image style="margin-left:20rpx" src="/image/fenxiang.png"></image>
+        </view>
+      </view>
+    </view>
+</view>
+
+
+<view class="acc">商品介绍</view>
+    <rich-text nodes="{{content}}"></rich-text>
+
+<!--屏幕背景变暗的背景  -->
+  <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+
+<view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+
+  <view class="right">
+          <image src="{{list.basicInfo.pic}}"></image>
+          <view class="acc">
+               <view class="tt">{{list.basicInfo.name}}</view>
+               <view class="tt2">
+                    <view class="red">￥{{list.basicInfo.minPrice}}</view>
+                    <text class="cc">￥{{list.basicInfo.originalPrice}}</text>
+               </view>
+               
+          </view>
+          <view bindtap="quxiao">x</view>
+ </view>
+  <view class="sul">
+    <text>购买数量</text>
+    <van-stepper style="display:inline-block;float:right" value="{{ 1 }}" bind:change="onChange" />
+  </view>
+  <button class="add" catchtap="goGwc" data-id="{{list.basicInfo.id}}">加入购物车</button>
+</view>
+
+
+<view class="bottom">
+    <image src="/image/kefu.png"></image>
+    <image src="/image/cart_icon.png"></image>
+    <image catchtap="shocang" data-id="{{list.basicInfo.id}}"
+     src="{{show===true ?'/image/shocang.png':'/image/shoucang.png'}}"></image>
+
+         <button class="btn1" bindtap="addShop">加入购物车</button>
+         <button class="btn2">立即购买</button>
+    
+</view>

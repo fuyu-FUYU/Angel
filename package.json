@@ -1,0 +1,22 @@
+{
+  "name": "angel",
+  "version": "1.0.0",
+  "description": "天使童装小程序",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fuyu-FUYU/Angel.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fuyu-FUYU/Angel/issues"
+  },
+  "homepage": "https://github.com/fuyu-FUYU/Angel#readme",
+  "dependencies": {
+    "@vant/weapp": "^1.2.2"
+  }
+}

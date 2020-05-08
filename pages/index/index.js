@@ -1,13 +1,17 @@
 //index.js
+const { getGoodsList, getBanner, getGoodsCate } = require('../../network/api.js');
+
+
 //获取应用实例
 const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello 浮裕',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+      banner:[],
+      list:[],
+      tuijian:[],
+      pintuan:[],
+      msg:[]
   },
   //事件处理函数
   bindViewTap: function() {
@@ -15,40 +19,100 @@ Page({
       url: '../logs/logs'
     })
   },
+  goss(){
+    wx.navigateTo({
+      url: '/pages/ss/ss',
+    })
+  },
   onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
+
+    getGoodsList().then((res) => {
+      console.log(res)
+      if (res.code == 0) {
+        let msg = []
+        let msg2 = []
+        let msg3 = []
+
+        res.data.forEach((i) => {
+          if (i.recommendStatusStr === '推荐') {
+            msg.push(i)
+          }
+        })
+
+
+        res.data.forEach((i) => {
+          if (i.pingtuan === true) {
+            msg2.push(i)
+          }
+        })
+
+        res.data.forEach((i) => {
+          if (i.recommendStatusStr === '普通') {
+            msg3.push(i)
+          }
+        })
+
         this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
+          tuijian: msg,
+          pintuan: msg2,
+          msg: msg3
+
+        })
+        // console.log(this.data.tuijian)
+        console.log(this.data.msg)
+      }
+
+    })
+
+    getBanner().then((res)=>{
+      if (res.code === 0) {
+        let msg = []
+
+        res.data.forEach((i) => {
+          if (i.type === 'index') {
+            msg.push(i)
+          }
+        })
+        this.setData({
+          banner: msg
+        })
+        // console.log(this.data.banner)
+      }
+    })
+    getGoodsCate().then((res)=>{
+
+      if (res.code === 0) {
+        this.setData({
+          list: res.data
         })
       }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+
     })
+
+  },
+  golist(e){
+    var id = e.currentTarget.dataset.item
+    let index = e.currentTarget.dataset.index
+
+    console.log(id)
+
+    wx.reLaunch({
+      url: `/pages/list/list?id=${id}&index=${index}`,
+    })
+  },
+  goxq(e){
+
+    let id =e.currentTarget.dataset.item
+
+    console.log(id)
+
+
+      wx.navigateTo({
+        url: `/pages/xq/xq?id=${id}`,
+      })
+
+
   }
+
+
 })

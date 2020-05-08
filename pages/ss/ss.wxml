@@ -1,0 +1,24 @@
+<input class="inp" placeholder="输入搜索关键词" bindinput="value" bindconfirm="wc" ></input>
+
+<view class="top">
+  <text>综合</text>
+  <text>新品</text>
+  <text>销量</text>
+  <text>价格</text>
+</view>
+
+<view class="right" bindtap="goxq" data-item="{{item.id}}" wx:for="{{list}}">
+          <image src="{{item.pic}}"></image>
+          <view class="acc" style="margin:18rpx">
+               <view class="tt">{{item.name}}</view>
+               <view class="tt2">
+                    <view class="red">￥{{item.minPrice}}</view><image src="/image/cart(2).png"></image>
+               </view>
+               
+               <view class="tt2">
+                    <text class="tt1">已售 {{item.numberSells}}件</text>
+                    <text>评价 +0积分</text>
+               </view>
+               
+          </view>
+</view>

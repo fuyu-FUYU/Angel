@@ -13,7 +13,7 @@
     </view>
     <view class="t2" data-id="{{item.goodsId}}" catchtap="add">{{item.goodsName}}</view>
     <view class="t3">
-      <image src="/public/images/del.png" catchtap="del" data-gd="{{item.goodsId}}" data-id="{{item.id}}"></image>
+      <image src="/image/del.png" catchtap="del" data-gd="{{item.goodsId}}" data-id="{{item.id}}"></image>
     </view>
   </view>
 </view>

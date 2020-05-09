@@ -71,7 +71,7 @@ Page({
     })
   },
   onShow() {
-    this.getTf()
+    
   },
   yx() {
     this.lg();

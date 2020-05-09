@@ -19,7 +19,7 @@ Page({
   },
   jian(e){
     let  item = e.currentTarget.dataset.item;
-    let token = 'ecf9379e-a954-4573-819d-4d3a196fa4df';
+    let token = wx.getStorageSync('token');
     item.number--
     wx.request({
       url: `https://api.it120.cc/fyy/shopping-cart/modifyNumber?key=${item.key}&number=${item.number}&token=${token}`,
@@ -39,7 +39,7 @@ Page({
 
   jia(e)   {
         let item = e.currentTarget.dataset.item;
-        let  token = 'ecf9379e-a954-4573-819d-4d3a196fa4df';
+    let token = wx.getStorageSync('token');
         item.number++
         wx.request({
             url:  `https://api.it120.cc/fyy/shopping-cart/modifyNumber?key=${item.key}&number=${item.number}&token=${token}`,
@@ -57,7 +57,7 @@ Page({
     },
   del(e){
     let  item = e.currentTarget.dataset.item;
-    let token = 'ecf9379e-a954-4573-819d-4d3a196fa4df';
+    let token = wx.getStorageSync('token');
     wx.request({
       url: `https://api.it120.cc/fyy/shopping-cart/remove?key=${item.key}&token=${token}`,
       method: 'POST',
@@ -108,7 +108,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    let token ="ecf9379e-a954-4573-819d-4d3a196fa4df"
+    let token = wx.getStorageSync('token')
       wx.request({
         url: `https://api.it120.cc/fyy/shopping-cart/info?token=${token}`,
         success:(res)=>{

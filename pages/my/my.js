@@ -53,6 +53,8 @@ Page({
       success: (res) => {
         console.log(res)
         if (res.data.code == 0) {
+          //如果后台有这个用户，说明已经登录过了
+          // 调用na这个方法，获取用户信息渲染到页面
           this.na();
           this.setData({
             show: false,

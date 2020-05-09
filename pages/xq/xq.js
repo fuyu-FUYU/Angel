@@ -17,7 +17,7 @@ Page({
   shocang(e){
 
      let id = e.currentTarget.dataset.id;
-    let token ="ecf9379e-a954-4573-819d-4d3a196fa4df"
+    let token = wx.getStorageSync('token')
 
     if(this.data.show==false){
       wx.request({
@@ -45,7 +45,7 @@ Page({
     
   },
   onLoad: function (options) {
-    let token = "ecf9379e-a954-4573-819d-4d3a196fa4df"
+    let token = wx.getStorageSync('token')
 
     wx.request({
       url: `https://api.it120.cc/fyy/shop/goods/fav/check?goodsId=${options.id}&token=${token}`,
